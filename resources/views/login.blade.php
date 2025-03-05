@@ -66,15 +66,15 @@
 
     <div class="login-options">
         <a href="/login_admin" class="login-btn">
-            <img src="admin-icon.png" alt="Admin">
+            <img src="admin.png" alt="Admin">
             Admin
         </a>
         <a href="/login_dosen" class="login-btn">
-            <img src="dosen-icon.png" alt="Dosen">
+            <img src="dosen.png" alt="Dosen">
             Dosen
         </a>
         <a href="/login_mahasiswa" class="login-btn">
-            <img src="mahasiswa-icon.png" alt="Mahasiswa">
+            <img src="mahasiswa.png" alt="Mahasiswa">
             Mahasiswa
         </a>
     </div>

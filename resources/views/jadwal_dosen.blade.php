@@ -22,8 +22,9 @@
                     <a href="/cetak_dosen" class="block py-2 px-4 mb-2">🖨 Cetak</a>
                 </nav>
             </div>
-            <a href="/logout_dosen" class="block py-2 px-4 bg-red-500 text-white rounded">⬅ Log Out</a>
+            <a href="/logout_dosen" class="block py-2 px-4 text-black rounded font-bold">⬅ Log Out</a>
         </div>
+
 
         <!-- Content -->
         <div class="flex-1 p-6">

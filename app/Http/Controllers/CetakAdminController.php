@@ -2,17 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\login_mahasiswa;
+use App\Models\cetak_admin;
 use Illuminate\Http\Request;
 
-class LoginMahasiswaController extends Controller
+class CetakAdminController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return view ('login_mahasiswa');
+        return view('cetak_admin');
     }
 
     /**
@@ -34,7 +34,7 @@ class LoginMahasiswaController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(login_mahasiswa $login_mahasiswa)
+    public function show(cetak_admin $cetak_admin)
     {
         //
     }
@@ -42,7 +42,7 @@ class LoginMahasiswaController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(login_mahasiswa $login_mahasiswa)
+    public function edit(cetak_admin $cetak_admin)
     {
         //
     }
@@ -50,7 +50,7 @@ class LoginMahasiswaController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, login_mahasiswa $login_mahasiswa)
+    public function update(Request $request, cetak_admin $cetak_admin)
     {
         //
     }
@@ -58,7 +58,7 @@ class LoginMahasiswaController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(login_mahasiswa $login_mahasiswa)
+    public function destroy(cetak_admin $cetak_admin)
     {
         //
     }

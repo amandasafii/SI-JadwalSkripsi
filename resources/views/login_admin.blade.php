@@ -78,19 +78,19 @@
     <div class="container">
         <h1>SKRIPSI</h1>
         <div class="login-box">
-            <form action="/dashboard_admin" method="POST">
+            <form action="/dashboard_admin" method="get">
                 
-                <label><i class="fas fa-user"></i> Nama</label>
+                 {{-- <label><i class="fas fa-user"></i> Nama</label>
                 <input type="text" placeholder="Masukkan nama anda" required>
 
                 <label><i class="fas fa-id-badge"></i> ID User</label>
-                <input type="text" placeholder="Masukkan user ID anda" required>
+                <input type="text" placeholder="Masukkan user ID anda" required> --}}
 
                 <label><i class="fas fa-user"></i> Username</label>
                 <input type="text" placeholder="Masukkan username anda" required>
 
-                <label><i class="fas fa-envelope"></i> Email</label>
-                <input type="email" placeholder="Masukkan email anda" required>
+                {{-- <label><i class="fas fa-envelope"></i> Email</label>
+                <input type="email" placeholder="Masukkan email anda" required> --}}
 
                 <label><i class="fas fa-lock"></i> Password</label>
                 <input type="password" placeholder="Masukkan password anda" required>

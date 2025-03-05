@@ -1,3 +1,13 @@
+<?php
+session_start();
+
+if (isset($_POST['hapus'])) {
+    // Proses hapus semua data (Pastikan hapus.php menangani penghapusan di database)
+    header("Location: hapus.php");
+    exit;
+}
+?>
+
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -13,19 +23,16 @@
             <div>
                 <h1 class="text-xl font-bold">Sistem Informasi Skripsi Online</h1>
                 <nav class="mt-5">
-                    <a href="/dashboard_dosen" class="block py-2 px-4 bg-gray-300 rounded mb-2">🏠 Dashboard</a>
-                    <a href="/mahasiswa_dosen" class="block py-2 px-4 mb-2">🎓 Mahasiswa</a>
-                    <a href="/dosen_dosen" class="block py-2 px-4 mb-2">👩‍🏫 Dosen</a>
-                    <a href="/penguji_dosen" class="block py-2 px-4 mb-2">🧑‍⚖️ Penguji Sidang</a>
-                    <a href="/jadwal_dosen" class="block py-2 px-4 mb-2">📅 Jadwal Sidang</a>
-                    <a href="/ruangan_dosen" class="block py-2 px-4 mb-2">🏢 Ruangan</a>
-                    <a href="/cetak_dosen" class="block py-2 px-4 mb-2">🖨 Cetak</a>
+                    <a href="/dashboard_admin" class="block py-2 px-4 bg-gray-300 rounded mb-2">🏠 Dashboard</a>
+                    <a href="/mahasiswa_admin" class="block py-2 px-4 mb-2">🎓 Mahasiswa</a>
+                    <a href="/dosen_admin" class="block py-2 px-4 mb-2">👩‍🏫 Dosen</a>
+                    <a href="/ruangan_admin" class="block py-2 px-4 mb-2">🏢 Ruangan</a>
+                    <a href="/cetak_admin" class="block py-2 px-4 mb-2">🖨 Cetak</a>
                 </nav>
             </div>
-            <a href="/logout_dosen" class="block py-2 px-4 bg-red-500 text-white rounded">⬅ Log Out</a>
+            <a href="/logout_dosen" class="block py-2 px-4 text-black rounded font-bold">⬅ Log Out</a>
         </div>
-        
-        
+
         <!-- Main Content -->
         <div class="flex-1 p-6">
             <div class="flex justify-between items-center">
@@ -58,6 +65,15 @@
                     <p class="text-2xl font-bold">1</p>
                 </div>
             </div>
+
+            <!-- Tombol Edit dan Hapus -->
+            <div class="mt-5 flex space-x-3">
+                <a href="/edit_dashadmin" class="px-4 py-2 bg-blue-500 text-white rounded">✏ Edit Data</a>
+                <form method="post">
+                    <button type="submit" name="hapus" class="px-4 py-2 bg-red-500 text-white rounded">🗑 Hapus Data</button>
+                </form>
+            </div>
+
         </div>
     </div>
 </body>

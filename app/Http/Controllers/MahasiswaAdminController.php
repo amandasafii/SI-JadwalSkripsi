@@ -2,17 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\dashboard_admin;
+use App\Models\mahasiswa_admin;
 use Illuminate\Http\Request;
 
-class LoginAdminController extends Controller
+class MahasiswaAdminController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return view ('dashboard_admin');
+        return view('mahasiswa_admin');
     }
 
     /**
@@ -34,7 +34,7 @@ class LoginAdminController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(login_admin $login_admin)
+    public function show(mahasiwa_admin $mahasiwa_admin)
     {
         //
     }
@@ -42,7 +42,7 @@ class LoginAdminController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(login_admin $login_admin)
+    public function edit(mahasiwa_admin $mahasiwa_admin)
     {
         //
     }
@@ -50,7 +50,7 @@ class LoginAdminController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, login_admin $login_admin)
+    public function update(Request $request, mahasiwa_admin $mahasiwa_admin)
     {
         //
     }
@@ -58,7 +58,7 @@ class LoginAdminController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(login_admin $login_admin)
+    public function destroy(mahasiwa_admin $mahasiwa_admin)
     {
         //
     }

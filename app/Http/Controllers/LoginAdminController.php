@@ -15,6 +15,11 @@ class LoginAdminController extends Controller
         return view ('login_admin');
     }
 
+    public function cek_login()
+    {
+        return redirect('dashboard_admin');
+    }
+
     /**
      * Show the form for creating a new resource.
      */

@@ -16,14 +16,13 @@
                     <a href="/dashboard_dosen" class="block py-2 px-4 bg-gray-300 rounded mb-2">🏠 Dashboard</a>
                     <a href="/mahasiswa_dosen" class="block py-2 px-4 mb-2">🎓 Mahasiswa</a>
                     <a href="/dosen_dosen" class="block py-2 px-4 mb-2">👩‍🏫 Dosen</a>
-                    <a href="/penguji_dosen" class="block py-2 px-4 mb-2">🧑‍⚖️ Penguji Sidang</a>
-                    <a href="/jadwal_dosen" class="block py-2 px-4 mb-2">📅 Jadwal Sidang</a>
                     <a href="/ruangan_dosen" class="block py-2 px-4 mb-2">🏢 Ruangan</a>
                     <a href="/cetak_dosen" class="block py-2 px-4 mb-2">🖨 Cetak</a>
                 </nav>
             </div>
-            <a href="/logout_dosen" class="block py-2 px-4 bg-red-500 text-white rounded">⬅ Log Out</a>
+            <a href="/logout_dosen" class="block py-2 px-4 text-black rounded font-bold">⬅ Log Out</a>
         </div>
+
 
         <!-- Content -->
         <div class="flex-1 p-6">
@@ -40,21 +39,22 @@
                 <table class="w-full border-collapse border border-gray-300">
                     <thead>
                         <tr class="bg-gray-200">
-                            <th class="border p-2">ID Jadwal</th>
-                            <th class="border p-2">ID Penguji</th>
-                            <th class="border p-2">NIDN</th>
+                            <th class="border p-2">Mahasiswa</th>
+                            <th class="border p-2">Dosen</th>
+                            <th class="border p-2">Ruangan</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td class="border p-2">1</td>
-                            <td class="border p-2">12345678</td>
-                            <td class="border p-2">6543</td>
-                            
+                            <td class="border p-2">Amanda</td>
+                            <td class="border p-2">Refal</td>
+                            <td class="border p-2">J.5.1</td>
                         </tr>
-                        <!-- Tambahkan data lain di sini -->
                     </tbody>
                 </table>
+                <div class="mt-4 text-right">
+                    <button onclick="window.print()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">🖨 Cetak</button>
+                </div>
             </div>
         </div>
     </div>
