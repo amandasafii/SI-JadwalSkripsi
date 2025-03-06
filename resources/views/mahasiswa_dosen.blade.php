@@ -43,7 +43,6 @@
                         <tr class="bg-gray-200">
                             <th class="border p-2">NPM</th>
                             <th class="border p-2">Nama Mahasiswa</th>
-                            <th class="border p-2">Jurusan</th>
                             <th class="border p-2">Prodi</th>
                             <th class="border p-2">Judul Skripsi</th>
                             <th class="border p-2">Email</th>
@@ -54,7 +53,6 @@
                         <tr>
                             <td>{{ $m['npm'] }}</td>
                             <td>{{ $m['nama_mahasiswa'] }}</td>
-                            <td>{{ $m['jurusan'] }}</td>
                             <td>{{ $m['program_studi'] }}</td>
                             <td>{{ $m['judul_skripsi'] }}</td>
                             <td>{{ $m['email'] }}</td>

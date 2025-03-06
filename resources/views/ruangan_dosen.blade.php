@@ -41,18 +41,16 @@
                 <table class="w-full border-collapse border border-gray-300">
                     <thead>
                         <tr class="bg-gray-200">
-                            <th class="border p-2">ID Ruangan</th>
+                            <th class="border p-2">Kode Ruangan</th>
                             <th class="border p-2">Nama Ruangan</th>
-                            <th class="border p-2">Lokasi</th>
                             
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($ruangan as $r)
                     <tr class="border">
-                        <td class="border p-2">{{ $r['id_ruangan'] }}</td>
+                        <td class="border p-2">{{ $r['kode_ruangan'] }}</td>
                         <td class="border p-2">{{ $r['nama_ruangan'] }}</td>
-                        <td class="border p-2">{{ $r['lokasi'] }}</td>
                     </tr>
                     @endforeach
                         <!-- Tambahkan data lain di sini -->

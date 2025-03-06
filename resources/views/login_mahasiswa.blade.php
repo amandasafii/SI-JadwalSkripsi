@@ -71,6 +71,13 @@
         button:hover {
             background: #0056b3;
         }
+
+        .error-message {
+            color: red;
+            font-size: 14px;
+            margin-top: 10px;
+            display: none;
+        }
     </style>
 </head>
 <body>
@@ -78,27 +85,39 @@
     <div class="container">
         <h1>SKRIPSI</h1>
         <div class="login-box">
-            <form action="/dashboard_mahasiswa" method="GET">
-                
-                {{-- <label><i class="fas fa-user"></i> Nama</label>
-                <input type="text" placeholder="Masukkan nama anda" required>
+            <form id="loginForm">
+                <label for="username"><i class="fas fa-user"></i> Username</label>
+                <input type="text" id="username" placeholder="Masukkan username anda" required>
 
-                <label><i class="fas fa-id-badge"></i> ID User</label>
-                <input type="text" placeholder="Masukkan user ID anda" required> --}}
-
-                <label><i class="fas fa-user"></i> Username</label>
-                <input type="text" placeholder="Masukkan username anda" required>
-
-                {{-- <label><i class="fas fa-envelope"></i> Email</label>
-                <input type="email" placeholder="Masukkan email anda" required> --}}
-
-                <label><i class="fas fa-lock"></i> Password</label>
-                <input type="password" placeholder="Masukkan password anda" required>
+                <label for="password"><i class="fas fa-lock"></i> Password</label>
+                <input type="password" id="password" placeholder="Masukkan password anda" required>
 
                 <button type="submit">Login</button>
+                <p id="error-message" class="error-message">Username atau password salah!</p>
             </form>
         </div>
     </div>
 
+    <script>
+        document.getElementById("loginForm").addEventListener("submit", function(event) {
+            event.preventDefault(); // Mencegah reload halaman
+
+            // Username dan Password yang Valid
+            const validUsername = "amanda";
+            const validPassword = "amanda123";
+
+            // Ambil Input User
+            const inputUsername = document.getElementById("username").value;
+            const inputPassword = document.getElementById("password").value;
+            const errorMessage = document.getElementById("error-message");
+
+            // Cek apakah username dan password sesuai
+            if (inputUsername === validUsername && inputPassword === validPassword) {
+                window.location.href = "/dashboard_dosen"; // Redirect ke dashboard
+            } else {
+                errorMessage.style.display = "block"; // Tampilkan pesan error
+            }
+        });
+    </script>
 </body>
 </html>

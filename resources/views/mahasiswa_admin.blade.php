@@ -35,28 +35,29 @@
             <table class="w-full min-w-full border-collapse border border-gray-300">
                 <thead>
                     <tr class="bg-gray-200">
-                        <th class="border border-gray-300 px-4 py-2">ID User</th>
-                        <th class="border border-gray-300 px-4 py-2">NPM</th>
-                        <th class="border border-gray-300 px-4 py-2">Nama</th>
-                        <th class="border border-gray-300 px-4 py-2">No Telp</th>
-                        <th class="border border-gray-300 px-4 py-2">Jurusan</th>
-                        <th class="border border-gray-300 px-4 py-2">Prodi</th>
+                        <th class="border p-2">NPM</th>
+                            <th class="border p-2">Nama Mahasiswa</th>
+                            <th class="border p-2">Prodi</th>
+                            <th class="border p-2">Judul Skripsi</th>
+                            <th class="border p-2">Email</th>>
                         <th class="border border-gray-300 px-4 py-2">Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr class="bg-white">
-                        <td class="border border-gray-300 px-4 py-2">1</td>
-                        <td class="border border-gray-300 px-4 py-2">123456</td>
-                        <td class="border border-gray-300 px-4 py-2">Amanda</td>
-                        <td class="border border-gray-300 px-4 py-2">08123456789</td>
-                        <td class="border border-gray-300 px-4 py-2">Teknik Informatika</td>
-                        <td class="border border-gray-300 px-4 py-2">S1</td>
-                        <td class="border border-gray-300 px-4 py-2 text-center">
-                            <a href="/edit_mhsadmin" class="text-blue-500 hover:text-blue-700 px-2">✏️ Edit</a>
-                            <a href="/hapus_mahasiswa/1" class="text-red-500 hover:text-red-700 px-2">🗑️ Hapus</a>
-                        </td>
-                    </tr>
+
+                    @foreach ($admin as $m)
+                        <tr>
+                            <td>{{ $m['npm'] }}</td>
+                            <td>{{ $m['nama_mahasiswa'] }}</td>
+                            <td>{{ $m['program_studi'] }}</td>
+                            <td>{{ $m['judul_skripsi'] }}</td>
+                            <td>{{ $m['email'] }}</td>
+                            <td class ="border border-gray-300 px-4 py-2">
+                            <a href="/edit_dosenadmin" class="text-blue-500 hover:text-blue-700 px-2">✏️</a>|
+                                    <a href="/hapus_mahasiswa/1" class="text-red-500 hover:text-red-700 px-2">🗑️</a></td>
+                        </tr>
+                        @endforeach
+                        
                 </tbody>
             </table>
         </div>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\mahasiswa_admin;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 
 class MahasiswaAdminController extends Controller
 {
@@ -12,7 +13,15 @@ class MahasiswaAdminController extends Controller
      */
     public function index()
     {
-        return view('mahasiswa_admin');
+        // return view('mahasiswa_admin');
+        $response = Http::get('http://localhost:8080/api/mahasiswa');
+
+        if ($response->successful()){
+            $admin = $response->json();
+            return view('mahasiswa_admin', compact('admin'));
+        }else {
+            return back()->with('error', 'Gagal mengambil data dosen');
+        }
     }
 
     /**
@@ -34,7 +43,7 @@ class MahasiswaAdminController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(mahasiwa_admin $mahasiwa_admin)
+    public function show(mahasiswa_admin $mahasiwa_admin)
     {
         //
     }
@@ -42,7 +51,7 @@ class MahasiswaAdminController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(mahasiwa_admin $mahasiwa_admin)
+    public function edit(mahasiswa_admin $mahasiwa_admin)
     {
         //
     }
@@ -50,7 +59,7 @@ class MahasiswaAdminController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, mahasiwa_admin $mahasiwa_admin)
+    public function update(Request $request, mahasiswa_admin $mahasiwa_admin)
     {
         //
     }
@@ -58,7 +67,7 @@ class MahasiswaAdminController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(mahasiwa_admin $mahasiwa_admin)
+    public function destroy(mahasiswa_admin $mahasiwa_admin)
     {
         //
     }
