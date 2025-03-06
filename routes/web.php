@@ -29,6 +29,8 @@ use App\HTTP\Controllers\EditCetakadminController;
 use App\HTTP\Controllers\RuanganAdminController;
 use App\HTTP\Controllers\TambahRuanganadminController;
 use App\HTTP\Controllers\EditRuanganadminController;
+use App\Http\Controllers\JadwalDosenController;
+use App\Http\Controllers\PengujiDosenController;
 
 /*
 |--------------------------------------------------------------------------

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\login_admin;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 
 class LoginAdminController extends Controller
 {
@@ -12,7 +13,15 @@ class LoginAdminController extends Controller
      */
     public function index()
     {
-        return view ('login_admin');
+        // return view ('login_admin');
+        $response = Http::get('http://localhost:8080/api/user');
+
+        if ($response->successful()){
+            $admin = $response->json();
+            return view('login_admin', compact('admin'));
+        }else {
+            return back()->with('error', 'Username atau Password anda salah');
+        }
     }
 
     public function cek_login()

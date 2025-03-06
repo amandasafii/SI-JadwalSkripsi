@@ -42,7 +42,6 @@
                     <thead>
                         <tr class="bg-gray-200">
                             <th class="border p-2">NPM</th>
-                            <th class="border p-2">id_user</th>
                             <th class="border p-2">Nama Mahasiswa</th>
                             <th class="border p-2">Jurusan</th>
                             <th class="border p-2">Prodi</th>
@@ -51,16 +50,16 @@
                         </tr>
                     </thead>
                     <tbody>
+                        @foreach ($mahasiswa as $m)
                         <tr>
-                            <td class="border p-2">1</td>
-                            <td class="border p-2">12345678</td>
-                            <td class="border p-2">Amanda Dwi Safitri</td>
-                            <td class="border p-2">Teknik Informatika</td>
-                            <td class="border p-2">Teknik Informatika</td>
-                            <td class="border p-2">Teknik ihwediyef</td>
-                            <td class="border p-2">amanda@example.com</td>
-                           
+                            <td>{{ $m['npm'] }}</td>
+                            <td>{{ $m['nama_mahasiswa'] }}</td>
+                            <td>{{ $m['jurusan'] }}</td>
+                            <td>{{ $m['program_studi'] }}</td>
+                            <td>{{ $m['judul_skripsi'] }}</td>
+                            <td>{{ $m['email'] }}</td>
                         </tr>
+                        @endforeach
                         <!-- Tambahkan data lain di sini -->
                     </tbody>
                 </table>

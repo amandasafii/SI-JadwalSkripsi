@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\dosen_dosen;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 
 class DosenDosenController extends Controller
 {
@@ -12,7 +13,16 @@ class DosenDosenController extends Controller
      */
     public function index()
     {
-        return view('dosen_dosen');
+        // return view('dosen_dosen');
+
+        $response = Http::get('http://localhost:8080/api/dosen');
+
+        if ($response->successful()){
+            $dosen = $response->json();
+            return view('dosen_dosen', compact('dosen'));
+        }else {
+            return back()->with('error', 'Gagal mengambil data dosen');
+        }
     }
 
     /**

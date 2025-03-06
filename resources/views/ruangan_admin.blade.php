@@ -28,7 +28,7 @@
         
         <!-- Main Content -->
         <div class="flex-1 p-6">
-            <div class="max-w-5xl mx-auto bg-white shadow-lg rounded-lg p-6">
+            <div class="max-w-5xl mx-auto bg-white shadow-lg rounded-lg p-6">  
                 <h2 class="text-xl font-semibold text-gray-700 mb-4">Data Ruangan</h2>
                 <div class="overflow-x-auto">
                     <table class="w-full border-collapse border border-gray-300">

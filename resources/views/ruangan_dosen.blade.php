@@ -48,13 +48,13 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td class="border p-2">1</td>
-                            <td class="border p-2">J.5.3</td>
-                            <td class="border p-2">GTIL Lantia 5</td>
-                         
-                            
-                        </tr>
+                        @foreach ($ruangan as $r)
+                    <tr class="border">
+                        <td class="border p-2">{{ $r['id_ruangan'] }}</td>
+                        <td class="border p-2">{{ $r['nama_ruangan'] }}</td>
+                        <td class="border p-2">{{ $r['lokasi'] }}</td>
+                    </tr>
+                    @endforeach
                         <!-- Tambahkan data lain di sini -->
                     </tbody>
                 </table>

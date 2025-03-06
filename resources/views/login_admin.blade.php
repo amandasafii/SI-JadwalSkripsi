@@ -99,6 +99,11 @@
             </form>
         </div>
     </div>
-
+    {{-- @foreach ($admin as $a)
+   
+        <label>{{ $a['username'] }}</label>
+        <label>{{ $a['password'] }}</label>
+   
+    @endforeach --}}
 </body>
 </html>
