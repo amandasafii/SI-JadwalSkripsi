@@ -40,7 +40,7 @@
                     <tr class="bg-gray-200">
                         <th class="border p-2">NIDN</th>
                         <th class="border p-2">Nama Dosen</th>
-                        <th class="border p-2">Jurusan</th>
+                        <th class="border p-2">Prodi</th>
                         <th class="border p-2">Email</th>
                     </tr>
                 </thead>
@@ -49,7 +49,7 @@
                     <tr class="border">
                         <td class="border p-2">{{ $d['nidn'] }}</td>
                         <td class="border p-2">{{ $d['nama_dosen'] }}</td>
-                        <td class="border p-2">{{ $d['jurusan'] }}</td>
+                        <td class="border p-2">{{ $d['program_studi'] }}</td>
                         <td class="border p-2">{{ $d['email'] }}</td>
                     </tr>
                     @endforeach

@@ -7,17 +7,15 @@
     <title>Data Dosen</title>
 </head>
 <body class="bg-gray-100 flex">
-    <div class="flex h-screen">
+    <div class="flex h-screen w-full">
         <!-- Sidebar -->
         <div class="w-64 bg-gray-200 p-5 flex flex-col justify-between">
             <div>
                 <h1 class="text-xl font-bold">Sistem Informasi Skripsi Online</h1>
                 <nav class="mt-5">
                     <a href="/dashboard_admin" class="block py-2 px-4 bg-gray-300 rounded mb-2">🏠 Dashboard</a>
-                    <a href="/mahasiswa_admin" class="block py-2 px-4 mb-2 text-gray-700 font-bold">🎓 Mahasiswa</a>
-                    <a href="/dosen_admin" class="block py-2 px-4 mb-2">👩‍🏫 Dosen</a>
-                    {{-- <a href="/penguji_dosen" class="block py-2 px-4 mb-2">🧑‍⚖️ Penguji Sidang</a>
-                    <a href="/jadwal_dosen" class="block py-2 px-4 mb-2">📅 Jadwal Sidang</a> --}}
+                    <a href="/mahasiswa_admin" class="block py-2 px-4 mb-2">🎓 Mahasiswa</a>
+                    <a href="/dosen_admin" class="block py-2 px-4 mb-2 text-gray-700 font-bold">👩‍🏫 Dosen</a>
                     <a href="/ruangan_admin" class="block py-2 px-4 mb-2">🏢 Ruangan</a>
                     <a href="/cetak_admin" class="block py-2 px-4 mb-2">🖨 Cetak</a>
                 </nav>
@@ -25,38 +23,40 @@
             <a href="/logout_dosen" class="block py-2 px-4 text-black rounded font-bold">⬅ Log Out</a>
         </div>
 
-        
         <!-- Main Content -->
-        <div class="flex-1 p-6">
-            <div class="max-w-5xl mx-auto bg-white shadow-lg rounded-lg p-6">
-                <h2 class="text-xl font-semibold text-gray-700 mb-4">Data Mahasiswa</h2>
+        <div class="flex-1 p-6 overflow-auto">
+            <div class="max-w-7xl w-full mx-auto bg-white shadow-lg rounded-lg p-6">
+                <!-- Judul dan Tombol -->
+                <h2 class="text-2xl font-semibold text-gray-700 mb-2">Data Dosen</h2>
+                <a href="/tambah_dosenadmin" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mb-4 inline-block">+ Tambah Data</a>
+
+                <!-- Membuat tabel responsif -->
                 <div class="overflow-x-auto">
-                    <table class="w-full border-collapse border border-gray-300">
+                    <table class="w-full border border-gray-400">
                         <thead>
                             <tr class="bg-gray-200">
-                                <th class="border border-gray-300 px-4 py-2">NIDN</th>
-                                <th class="border border-gray-300 px-4 py-2">Nama Dosen</th>
-                                <th class="border border-gray-300 px-4 py-2">Jurusan</th>
-                                <th class="border border-gray-300 px-4 py-2">Email</th>
-                                <th class="border border-gray-300 px-4 py-2">Aksi</th>
+                                <th class="border border-gray-400 px-4 py-2">NIDN</th>
+                                <th class="border border-gray-400 px-4 py-2">Nama Dosen</th>
+                                <th class="border border-gray-400 px-4 py-2">Prodi</th>
+                                <th class="border border-gray-400 px-4 py-2">Email</th>
+                                <th class="border border-gray-400 px-4 py-2 w-24">Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr class="bg-white">
-                                <td class="border border-gray-300 px-4 py-2">83112</td>
-                                <td class="border border-gray-300 px-4 py-2">Amanda</td>
-                                <td class="border border-gray-300 px-4 py-2">Teknik Informatika</td>
-                                <td class="border border-gray-300 px-4 py-2">amanda@gmail.com</td>
-                                <td class="border border-gray-300 px-4 py-2 text-center">
-                                    <a href="/edit_dosenadmin" class="text-blue-500 hover:text-blue-700 px-2">✏️ Edit</a>
-                                    <a href="/hapus_mahasiswa/1" class="text-red-500 hover:text-red-700 px-2">🗑️ Hapus</a>
+                            @foreach ($dosen as $d)
+                            <tr>
+                                <td class="border border-gray-400 px-4 py-2">{{ $d['nidn'] }}</td>
+                                <td class="border border-gray-400 px-4 py-2">{{ $d['nama_dosen'] }}</td>
+                                <td class="border border-gray-400 px-4 py-2">{{ $d['program_studi'] }}</td>
+                                <td class="border border-gray-400 px-4 py-2">{{ $d['email'] }}</td>
+                                <td class="border border-gray-400 px-4 py-2 text-center w-24">
+                                    <a href="/edit_dosenadmin" class="text-blue-500 hover:text-blue-700 px-2">✏️</a> |
+                                    <a href="/hapus_mahasiswa/1" class="text-red-500 hover:text-red-700 px-2">🗑️</a>
                                 </td>
                             </tr>
+                            @endforeach
                         </tbody>
                     </table>
-                </div>
-                <div class="mt-4 text-right">
-                    <a href="/tambah_dosenadmin" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">+ Tambah Data</a>
                 </div>
             </div>
         </div>

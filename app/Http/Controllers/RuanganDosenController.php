@@ -16,7 +16,7 @@ class RuanganDosenController extends Controller
         // return view('ruangan_dosen');
         $response = Http::get('http://localhost:8080/api/ruangan/');
 
-        if ($response->successful()){
+        if ($response->successful()){ 
             $ruangan = $response->json();
             return view('ruangan_dosen', compact('ruangan'));
         }else {

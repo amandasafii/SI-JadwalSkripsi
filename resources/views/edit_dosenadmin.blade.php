@@ -15,11 +15,11 @@
                 <nav class="mt-5">
                     <a href="/dashboard_admin" class="block py-2 px-4 bg-gray-300 rounded mb-2">🏠 Dashboard</a>
                     <a href="/mahasiswa_admin" class="block py-2 px-4 mb-2">🎓 Mahasiswa</a>
-                    <a href="/dosen_dosen" class="block py-2 px-4 mb-2">👩‍🏫 Dosen</a>
+                    <a href="/dosen_admin" class="block py-2 px-4 mb-2">👩‍🏫 Dosen</a>
                     {{-- <a href="/penguji_dosen" class="block py-2 px-4 mb-2">🧑‍⚖️ Penguji Sidang</a>
                     <a href="/jadwal_dosen" class="block py-2 px-4 mb-2">📅 Jadwal Sidang</a> --}}
-                    <a href="/ruangan_dosen" class="block py-2 px-4 mb-2">🏢 Ruangan</a>
-                    <a href="/cetak_dosen" class="block py-2 px-4 mb-2">🖨 Cetak</a>
+                    <a href="/ruangan_admin" class="block py-2 px-4 mb-2">🏢 Ruangan</a>
+                    <a href="/cetak_admin" class="block py-2 px-4 mb-2">🖨 Cetak</a>
                 </nav>
             </div>
             <a href="/logout_dosen" class="block py-2 px-4 text-black rounded font-bold">⬅ Log Out</a>

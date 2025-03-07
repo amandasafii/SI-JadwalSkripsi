@@ -15,7 +15,7 @@
                 <nav class="mt-5">
                     <a href="/dashboard_admin" class="block py-2 px-4 bg-gray-300 rounded mb-2">🏠 Dashboard</a>
                     <a href="/mahasiswa_admin" class="block py-2 px-4 mb-2">🎓 Mahasiswa</a>
-                    <a href="/dosen_dosen" class="block py-2 px-4 mb-2">👩‍🏫 Dosen</a>
+                    <a href="/dosen_admin" class="block py-2 px-4 mb-2">👩‍🏫 Dosen</a>
                     {{-- <a href="/penguji_dosen" class="block py-2 px-4 mb-2">🧑‍⚖️ Penguji Sidang</a>
                     <a href="/jadwal_dosen" class="block py-2 px-4 mb-2">📅 Jadwal Sidang</a> --}}
                     <a href="/ruangan_admin" class="block py-2 px-4 mb-2">🏢 Ruangan</a>
@@ -33,15 +33,11 @@
                 <h3 class="text-center text-lg font-semibold mb-4">Skripsi Online</h3>
                 <form action="#" method="POST">
                     <div class="mb-4">
-                        <label class="block mb-1">Id Ruangan :</label>
+                        <label class="block mb-1">Kode Ruangan :</label>
                         <input type="text" class="w-full border p-2 rounded">
                     </div>
                     <div class="mb-4">
                         <label class="block mb-1">Nama Ruangan :</label>
-                        <input type="text" class="w-full border p-2 rounded">
-                    </div>
-                    <div class="mb-4">
-                        <label class="block mb-1">Lokasi :</label>
                         <input type="text" class="w-full border p-2 rounded">
                     </div>
                     <div class="text-center">
