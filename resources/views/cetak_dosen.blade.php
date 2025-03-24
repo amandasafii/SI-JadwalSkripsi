@@ -13,13 +13,13 @@
             <div>
                 <h1 class="text-xl font-bold">Sistem Informasi Skripsi Online</h1>
                 <nav class="mt-5">
-                    <a href="/dashboard_admin" class="block py-2 px-4 bg-gray-300 rounded mb-2">🏠 Dashboard</a>
-                    <a href="/mahasiswa_admin" class="block py-2 px-4 mb-2 text-gray-700 font-bold">🎓 Mahasiswa</a>
-                    <a href="/dosen_admin" class="block py-2 px-4 mb-2">👩‍🏫 Dosen</a>
+                    <a href="/dashboard_dosen" class="block py-2 px-4 bg-gray-300 rounded mb-2">🏠 Dashboard</a>
+                    <a href="/mahasiswa_dosen" class="block py-2 px-4 mb-2 text-gray-700 font-bold">🎓 Mahasiswa</a>
+                    <a href="/dosen_dosen" class="block py-2 px-4 mb-2">👩‍🏫 Dosen</a>
                     {{-- <a href="/penguji_dosen" class="block py-2 px-4 mb-2">🧑‍⚖️ Penguji Sidang</a>
                     <a href="/jadwal_dosen" class="block py-2 px-4 mb-2">📅 Jadwal Sidang</a> --}}
-                    <a href="/ruangan_admin" class="block py-2 px-4 mb-2">🏢 Ruangan</a>
-                    <a href="/cetak_admin" class="block py-2 px-4 mb-2">🖨 Cetak</a>
+                    <a href="/ruangan_dosen" class="block py-2 px-4 mb-2">🏢 Ruangan</a>
+                    <a href="/cetak_dosen" class="block py-2 px-4 mb-2">🖨 Cetak</a>
                 </nav>
             </div>
             <a href="/logout_dosen" class="block py-2 px-4 text-black rounded font-bold">⬅ Log Out</a>
@@ -52,8 +52,7 @@
                         <td class="border border-gray-300 px-4 py-2">J.1.2</td>
                         <td class="border border-gray-300 px-4 py-2">GTIL Lantai 1</td>
                         <td class="border border-gray-300 px-4 py-2">Vina Mauliana</td>
-                        <td class="border border-gray-300 px-4 py-2 text-center">
-                        </td>
+                        
                     </tr>
                 </tbody>
             </table>
