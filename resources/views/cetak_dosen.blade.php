@@ -39,21 +39,33 @@
                         <th class="border border-gray-300 px-4 py-2">Prodi</th>
                         <th class="border border-gray-300 px-4 py-2">Waktu Sidang</th>
                         <th class="border border-gray-300 px-4 py-2">Nama Ruangan</th>
-                        <th class="border border-gray-300 px-4 py-2">Lokasi</th>
+                        {{-- <th class="border border-gray-300 px-4 py-2">Lokasi</th> --}}
                         <th class="border border-gray-300 px-4 py-2">Dosen Penguji</th>
                     </tr>
                 </thead>
-                <tbody>
+                {{-- <tbody>
                     <tr class="bg-white">
                         <td class="border border-gray-300 px-4 py-2">83112</td>
                         <td class="border border-gray-300 px-4 py-2">Amanda</td>
                         <td class="border border-gray-300 px-4 py-2">Teknik Informatika</td>
                         <td class="border border-gray-300 px-4 py-2">09.00-10.00</td>
                         <td class="border border-gray-300 px-4 py-2">J.1.2</td>
-                        <td class="border border-gray-300 px-4 py-2">GTIL Lantai 1</td>
-                        <td class="border border-gray-300 px-4 py-2">Vina Mauliana</td>
+                        {{-- <td class="border border-gray-300 px-4 py-2">GTIL Lantai 1</td> --}}
+                        {{-- <td class="border border-gray-300 px-4 py-2">Vina Mauliana</td>
                         
                     </tr>
+                </tbody> --}}
+                    <tbody>
+                    @foreach ($view_penjadwalan["data"] as $c)
+                    <tr class="border">
+                        <td class="border p-2">{{ $c['npm'] }}</td>
+                        <td class="border p-2">{{ $c['nama_mahasiswa'] }}</td>
+                        <td class="border p-2">{{ $c['program_studi'] }}</td>
+                        <td class="border p-2">{{ $c['waktu_sidang'] }}</td>
+                        <td class="border p-2">{{ $c['nama_ruangan'] }}</td>
+                        <td class="border p-2">{{ $c['dosen_penguji'] }}</td>
+                    </tr>
+                    @endforeach
                 </tbody>
             </table>
         </div>

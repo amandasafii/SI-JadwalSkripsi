@@ -15,7 +15,7 @@ class DosenDosenController extends Controller
     {
         // return view('dosen_dosen');
 
-        $response = Http::get('http://localhost:8080/api/dosen');
+        $response = Http::get('http://localhost:8080/dosen');
 
         if ($response->successful()){
             $dosen = $response->json();

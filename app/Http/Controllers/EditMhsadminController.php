@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\edit_mhsadmin;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 
 class EditMhsadminController extends Controller
 {
@@ -12,7 +13,14 @@ class EditMhsadminController extends Controller
      */
     public function index()
     {
-        return view('edit_mhsadmin');
+        $response = Http::get('http://localhost:8080/api/mahasiswa');
+
+        if ($response->successful()){
+            $mahasiswa = $response->json();
+            return view('mahasiswa_dosen', compact('mahasiswa'));
+        }else {
+            return back()->with('error', 'Gagal mengambil data mahasiswa');
+        }
     }
 
     /**

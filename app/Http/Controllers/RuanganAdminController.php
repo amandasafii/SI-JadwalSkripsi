@@ -14,7 +14,7 @@ class RuanganAdminController extends Controller
     public function index()
     {
         // return view('ruangan_admin');
-        $response = Http::get('http://localhost:8080/api/ruangan/');
+        $response = Http::get('http://localhost:8080/ruangan/');
 
         if ($response->successful()){ 
             $ruangan = $response->json();

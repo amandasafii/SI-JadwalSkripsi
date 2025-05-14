@@ -14,7 +14,7 @@ class MahasiswaDosenController extends Controller
     public function index()
     {
         // return view('mahasiswa_dosen');
-        $response = Http::get('http://localhost:8080/api/mahasiswa');
+        $response = Http::get('http://localhost:8080/mahasiswa');
 
         if ($response->successful()){
             $mahasiswa = $response->json();

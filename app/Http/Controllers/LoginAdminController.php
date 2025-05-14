@@ -14,7 +14,7 @@ class LoginAdminController extends Controller
     public function index()
     {
         // return view ('login_admin');
-        $response = Http::get('http://localhost:8080/api/user');
+        $response = Http::get('http://localhost:8080/user');
 
         if ($response->successful()){
             $admin = $response->json();

@@ -39,12 +39,12 @@
                         <th class="border border-gray-300 px-4 py-2">Prodi</th>
                         <th class="border border-gray-300 px-4 py-2">Waktu Sidang</th>
                         <th class="border border-gray-300 px-4 py-2">Nama Ruangan</th>
-                        <th class="border border-gray-300 px-4 py-2">Lokasi</th>
+                        {{-- <th class="border border-gray-300 px-4 py-2">Lokasi</th> --}}
                         <th class="border border-gray-300 px-4 py-2">Dosen Penguji</th>
                         <th class="border border-gray-300 px-4 py-2">Aksi</th>
                     </tr>
                 </thead>
-                <tbody>
+                {{-- <tbody>
                     <tr class="bg-white">
                         <td class="border border-gray-300 px-4 py-2">83112</td>
                         <td class="border border-gray-300 px-4 py-2">Amanda</td>
@@ -58,6 +58,22 @@
                             <a href="/hapus_mahasiswa/1" class="text-red-500 hover:text-red-700 px-2">🗑️ Hapus</a>
                         </td>
                     </tr>
+                </tbody> --}}
+                 <tbody>
+                    @foreach ($view_penjadwalan["data"] as $c)
+                    <tr class="border">
+                        <td class="border p-2">{{ $c['npm'] }}</td>
+                        <td class="border p-2">{{ $c['nama_mahasiswa'] }}</td>
+                        <td class="border p-2">{{ $c['program_studi'] }}</td>
+                        <td class="border p-2">{{ $c['waktu_sidang'] }}</td>
+                        <td class="border p-2">{{ $c['nama_ruangan'] }}</td>
+                        <td class="border p-2">{{ $c['dosen_penguji'] }}</td>
+                         <td class="border border-gray-400 px-4 py-2 text-center w-24">
+                                    <a href="/edit_cetakadmin" class="text-blue-500 hover:text-blue-700 px-2">✏️</a> |
+                                    <a href="/hapus_mahasiswa/1" class="text-red-500 hover:text-red-700 px-2">🗑️</a>
+                                </td>
+                    </tr>
+                    @endforeach
                 </tbody>
             </table>
         </div>

@@ -44,7 +44,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($admin as $m)
+                            @foreach ($admin["data"] as $m)
                                 <tr>
                                     <td class="border border-gray-400 p-2">{{ $m['npm'] }}</td>
                                     <td class="border border-gray-400 p-2">{{ $m['nama_mahasiswa'] }}</td>
@@ -52,7 +52,7 @@
                                     <td class="border border-gray-400 p-2">{{ $m['judul_skripsi'] }}</td>
                                     <td class="border border-gray-400 p-2">{{ $m['email'] }}</td>
                                     <td class="border border-gray-400 p-2 text-center w-24">
-                                        <a href="/edit_mhsadmin" class="text-blue-500 hover:text-blue-700 px-2">✏️</a> |
+                                        <a href="/mahasiswa_admin/{{ $m['npm'] }}/edit" class="text-blue-500 hover:text-blue-700 px-2">✏️</a> |
                                         <a href="/hapus_mahasiswa/1" class="text-red-500 hover:text-red-700 px-2">🗑️</a>
                                     </td>
                                 </tr>

@@ -52,10 +52,10 @@
                         <label class="block mb-1">Nama Ruangan :</label>
                         <input type="text" class="w-full border p-2 rounded">
                     </div>
-                    <div class="mb-4">
+                    {{-- <div class="mb-4">
                         <label class="block mb-1">Lokasi :</label>
                         <input type="text" class="w-full border p-2 rounded">
-                    </div>
+                    </div> --}}
                     <div class="mb-4">
                         <label class="block mb-1">Dosen Penguji :</label>
                         <input type="text" class="w-full border p-2 rounded">

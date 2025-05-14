@@ -41,7 +41,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($ruangan as $r)
+                            @foreach ($ruangan["data"] as $r)
                             <tr class="bg-white">
                                 <td class="border border-gray-400 px-4 py-2">{{ $r['kode_ruangan'] }}</td>
                                 <td class="border border-gray-400 px-4 py-2">{{ $r['nama_ruangan'] }}</td>

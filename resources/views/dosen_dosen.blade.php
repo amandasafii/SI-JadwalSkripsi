@@ -45,7 +45,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($dosen as $d)
+                    @foreach ($dosen["data"] as $d)
                     <tr class="border">
                         <td class="border p-2">{{ $d['nidn'] }}</td>
                         <td class="border p-2">{{ $d['nama_dosen'] }}</td>

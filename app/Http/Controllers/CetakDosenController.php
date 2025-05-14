@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\cetak_dosen;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 
 class CetakDosenController extends Controller
 {
@@ -12,7 +13,14 @@ class CetakDosenController extends Controller
      */
     public function index()
     {
-        return view('cetak_dosen');
+        $response = Http::get('http://localhost:8080/view_penjadwalan');
+
+        if ($response->successful()){
+            $view_penjadwalan = $response->json();
+            return view('cetak_dosen', compact('view_penjadwalan'));
+        }else {
+            return back()->with('error', 'Gagal mengambil data');
+        }
     }
 
     /**

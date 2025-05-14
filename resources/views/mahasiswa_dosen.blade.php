@@ -46,16 +46,19 @@
                             <th class="border p-2">Prodi</th>
                             <th class="border p-2">Judul Skripsi</th>
                             <th class="border p-2">Email</th>
+                            
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($mahasiswa as $m)
+                        @foreach ($mahasiswa["data"] as $m)
                         <tr>
                             <td>{{ $m['npm'] }}</td>
                             <td>{{ $m['nama_mahasiswa'] }}</td>
                             <td>{{ $m['program_studi'] }}</td>
                             <td>{{ $m['judul_skripsi'] }}</td>
                             <td>{{ $m['email'] }}</td>
+                            
+                            
                         </tr>
                         @endforeach
                         <!-- Tambahkan data lain di sini -->

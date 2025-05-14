@@ -14,7 +14,7 @@ class MahasiswaAdminController extends Controller
     public function index()
     {
         // return view('mahasiswa_admin');
-        $response = Http::get('http://localhost:8080/api/mahasiswa');
+        $response = Http::get('http://localhost:8080/mahasiswa');
 
         if ($response->successful()){
             $admin = $response->json();
@@ -53,7 +53,8 @@ class MahasiswaAdminController extends Controller
      */
     public function edit(mahasiswa_admin $mahasiwa_admin)
     {
-        //
+        // di coding di sini nda
+        return view('edit_mhsadmin');
     }
 
     /**
