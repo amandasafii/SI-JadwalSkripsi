@@ -59,10 +59,15 @@
                         </tbody>
                     </table>
                 </div>
-                <div class="mt-4 text-right">
+                {{-- <div class="mt-4 text-right">
                     <button onclick="window.print()"
                         class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">🖨 Cetak</button>
-                </div>
+                </div> --}}
+                <a href="{{ route('cetak_dosen') }}" 
+   class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
+   🧾 Download PDF
+</a>
+
             </div>
         </div>
 

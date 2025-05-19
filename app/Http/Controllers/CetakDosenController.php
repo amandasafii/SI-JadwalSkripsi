@@ -5,9 +5,24 @@ namespace App\Http\Controllers;
 use App\Models\cetak_dosen;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
+use Barryvdh\DomPDF\Facade\Pdf;
+
+
 
 class CetakDosenController extends Controller
 {
+    public function exportPdf()
+{
+    $response = Http::get('http://localhost:8080/view_penjadwalan');
+
+    if ($response->successful()) {
+        $view_penjadwalan = $response->json();
+        $pdf = Pdf::loadView('cetak_dosen_pdf', compact('view_penjadwalan'));
+        return $pdf->download('jadwal_sidang_dosen.pdf');
+    } else {
+        return back()->with('error', 'Gagal mengambil data');
+    }
+}
     /**
      * Display a listing of the resource.
      */
