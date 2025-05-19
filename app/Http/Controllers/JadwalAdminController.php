@@ -5,10 +5,9 @@ namespace App\Http\Controllers;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ClientException;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Http;
 use Illuminate\Pagination\LengthAwarePaginator;
 
-class MahasiswaAdminController extends Controller
+class JadwalAdminController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,7 +15,7 @@ class MahasiswaAdminController extends Controller
     public function index(Request $request)
     {
         $client = new Client();
-        $url = 'http://localhost:8080/mahasiswa';
+        $url = 'http://localhost:8080/jadwal';
 
         $response = $client->request('GET', $url);
         $content = $response->getBody()->getContents();
@@ -27,8 +26,8 @@ class MahasiswaAdminController extends Controller
             $search = strtolower($request->search);
             $data = array_filter($data, function ($item) use ($search) {
                 return str_contains(strtolower($item['npm']), $search) ||
-                    str_contains(strtolower($item['nama_mahasiswa']), $search) ||
-                    str_contains(strtolower($item['program_studi']), $search);
+                    str_contains(strtolower($item['kode_ruangan']), $search) ||
+                    str_contains(strtolower($item['waktu_sidang']), $search);
             });
         }
 
@@ -45,7 +44,7 @@ class MahasiswaAdminController extends Controller
             ['path' => $request->url(), 'query' => $request->query()]
         );
 
-        return view('mahasiswa_admin', ['data' => $paginatedData]);
+        return view('jadwal_admin', ['data' => $paginatedData]);
     }
 
     /**
@@ -53,7 +52,18 @@ class MahasiswaAdminController extends Controller
      */
     public function create()
     {
-        return view('tambah_mahasiswa');
+        $client = new Client();
+
+        $mahasiswaResponse = $client->request('GET', 'http://localhost:8080/mahasiswa');
+        $ruanganResponse = $client->request('GET', 'http://localhost:8080/ruangan');
+
+        $mahasiswaData = json_decode($mahasiswaResponse->getBody(), true)['data'];
+        $ruanganData = json_decode($ruanganResponse->getBody(), true)['data'];
+
+        return view('tambah_jadwaladmin', [
+            'mahasiswa' => $mahasiswaData,
+            'ruangan'   => $ruanganData
+        ]);
     }
 
     /**
@@ -62,21 +72,17 @@ class MahasiswaAdminController extends Controller
     public function store(Request $request)
     {
         $npm = $request->npm;
-        $nama_mahasiswa = $request->nama_mahasiswa;
-        $program_studi = $request->program_studi;
-        $judul_skripsi = $request->judul_skripsi;
-        $email = $request->email;
+        $kode_ruangan = $request->kode_ruangan;
+        $waktu_sidang = $request->waktu_sidang;
 
         $parameters = [
-            'npm' => $npm,
-            'nama_mahasiswa' => $nama_mahasiswa,
-            'program_studi' => $program_studi,
-            'judul_skripsi' => $judul_skripsi,
-            'email' => $email
+            'npm'          => $npm,
+            'kode_ruangan' => $kode_ruangan,
+            'waktu_sidang' => $waktu_sidang
         ];
 
         $client = new Client();
-        $url = 'http://localhost:8080/mahasiswa';
+        $url = 'http://localhost:8080/jadwal';
 
         try {
             $response = $client->request('POST', $url, [
@@ -84,7 +90,7 @@ class MahasiswaAdminController extends Controller
                 'body' => json_encode($parameters)
             ]);
 
-            return redirect('mahasiswa_admin')->with('success', 'Data Mahasiswa Berhasil Ditambahkan.');
+            return redirect('jadwal_admin')->with('success', 'Data Jadwal Sidang Berhasil Ditambahkan.');
         } catch (ClientException $e) {
             $error = json_decode($e->getResponse()->getBody()->getContents(), true);
             $validationErrors = $error['messages']['message'] ?? ['Terjadi kesalahan'];
@@ -95,56 +101,61 @@ class MahasiswaAdminController extends Controller
     /**
      * Display the specified resource.
      */
-    // public function show(mahasiswa_admin $mahasiwa_admin)
-    // {
-    //     //
-    // }
+    public function show(string $id)
+    {
+        //
+    }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $npm)
+    public function edit(string $id_jadwal)
     {
         $client = new Client();
-        $url = 'http://localhost:8080/mahasiswa/' . $npm;
 
         try {
-            $response = $client->request('GET', $url);
-            $content = $response->getBody()->getContents();
-            $contentArray = json_decode($content, true);
+            $jadwalResponse = $client->request('GET', 'http://localhost:8080/jadwal/' . $id_jadwal);
+            $jadwalData = json_decode($jadwalResponse->getBody()->getContents(), true);
+            $data = $jadwalData['data'];
 
-            $data = $contentArray['data'];
-            return view('edit_mhsadmin', ['data' => $data]);
+            $mahasiswaResponse = $client->request('GET', 'http://localhost:8080/mahasiswa');
+            $mahasiswaData = json_decode($mahasiswaResponse->getBody()->getContents(), true);
+            $mahasiswa = $mahasiswaData['data'];
+
+            $ruanganResponse = $client->request('GET', 'http://localhost:8080/ruangan');
+            $ruanganData = json_decode($ruanganResponse->getBody()->getContents(), true);
+            $ruangan = $ruanganData['data'];
+
+            return view('edit_jadwaladmin', compact('data', 'mahasiswa', 'ruangan'));
+            
         } catch (ClientException $e) {
             $response = $e->getResponse()->getBody()->getContents();
             $error = json_decode($response, true);
 
             $messages = $error['messages']['message'] ?? ($error['message'] ?? ['Terjadi kesalahan saat mengambil data.']);
-            return redirect()->to('edit_mhsadmin')->withErrors($messages);
+            return redirect()->to('edit_jadwaladmin')->withErrors($messages);
         } catch (\Exception $e) {
-            return redirect()->to('edit_mhsadmin')->withErrors(['Terjadi kesalahan tidak terduga.']);
+            return redirect()->to('edit_jadwaladmin')->withErrors(['Terjadi kesalahan tidak terduga.']);
         }
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, $npm)
+    public function update(Request $request, string $id_jadwal)
     {
-        $nama_mahasiswa = $request->nama_mahasiswa;
-        $program_studi = $request->program_studi;
-        $judul_skripsi = $request->judul_skripsi;
-        $email = $request->email;
+        $npm = $request->npm;
+        $kode_ruangan = $request->kode_ruangan;
+        $waktu_sidang = $request->waktu_sidang;
 
         $parameters = [
-            'nama_mahasiswa' => $nama_mahasiswa,
-            'program_studi' => $program_studi,
-            'judul_skripsi' => $judul_skripsi,
-            'email' => $email
+            'npm'          => $npm,
+            'kode_ruangan' => $kode_ruangan,
+            'waktu_sidang' => $waktu_sidang
         ];
 
         $client = new Client();
-        $url = 'http://localhost:8080/mahasiswa/' . $npm;
+        $url = 'http://localhost:8080/jadwal/' . $id_jadwal;
 
         try {
             $response = $client->request('PUT', $url, [
@@ -152,7 +163,7 @@ class MahasiswaAdminController extends Controller
                 'body' => json_encode($parameters)
             ]);
 
-            return redirect('mahasiswa_admin')->with('success', 'Data Mahasiswa Berhasil Diubah.');
+            return redirect('jadwal_admin')->with('success', 'Data Jadwal Sidang Berhasil Diubah.');
         } catch (ClientException $e) {
             $error = json_decode($e->getResponse()->getBody()->getContents(), true);
             $validationErrors = $error['messages']['message'] ?? ['Terjadi kesalahan'];
@@ -163,18 +174,18 @@ class MahasiswaAdminController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Request $request, $npm)
+    public function destroy(string $id_jadwal)
     {
         $client = new Client();
-        $url = 'http://localhost:8080/mahasiswa/' . $npm;
+        $url = 'http://localhost:8080/jadwal/' . $id_jadwal;
 
         try {
             $response = $client->request('DELETE', $url);
-            return redirect()->to('mahasiswa_admin')->with('success', 'Data Mahasiswa Berhasil Dihapus.');
+            return redirect('jadwal_admin')->with('success', 'Data Jadwal Sidang Berhasil Dihapus.');
         } catch (ClientException $e) {
             $error = json_decode($e->getResponse()->getBody()->getContents(), true);
             $validationErrors = $error['messages']['message'] ?? ['Terjadi kesalahan'];
-            return redirect()->to('mahasiswa_admin')->withErrors($validationErrors)->withInput();
+            return redirect()->back()->withErrors($validationErrors)->withInput();
         }
     }
 }

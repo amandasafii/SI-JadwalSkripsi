@@ -1,21 +1,14 @@
-<?php
-session_start();
-
-if (isset($_POST['hapus'])) {
-    // Proses hapus semua data (Pastikan hapus.php menangani penghapusan di database)
-    header("Location: hapus.php");
-    exit;
-}
-?>
-
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <title>Dashboard</title>
 </head>
+
 <body class="bg-gray-100">
     <div class="flex h-screen">
         <!-- Sidebar -->
@@ -23,14 +16,17 @@ if (isset($_POST['hapus'])) {
             <div>
                 <h1 class="text-xl font-bold">Sistem Informasi Skripsi Online</h1>
                 <nav class="mt-5">
-                    <a href="/dashboard_admin" class="block py-2 px-4 bg-gray-300 rounded mb-2">🏠 Dashboard</a>
+                    <a href="/dashboard_admin"
+                        class="block py-2 px-4 text-gray-700 font-bold bg-gray-300 rounded mb-2">🏠 Dashboard</a>
                     <a href="/mahasiswa_admin" class="block py-2 px-4 mb-2">🎓 Mahasiswa</a>
                     <a href="/dosen_admin" class="block py-2 px-4 mb-2">👩‍🏫 Dosen</a>
                     <a href="/ruangan_admin" class="block py-2 px-4 mb-2">🏢 Ruangan</a>
-                    <a href="/cetak_admin" class="block py-2 px-4 mb-2">🖨 Cetak</a>
+                    <a href="/jadwal_admin" class="block py-2 px-4 mb-2">📅 Jadwal Sidang</a>
+                    <a href="/penguji_admin" class="block py-2 px-4 mb-2">🧑‍⚖️ Penguji Sidang</a>
                 </nav>
             </div>
-            <a href="/logout_dosen" class="block py-2 px-4 text-black rounded font-bold">⬅ Log Out</a>
+            <button id="logoutButton" class="block py-2 px-4 text-black rounded font-bold text-left w-full">⬅ Log
+                Out</button>
         </div>
 
         <!-- Main Content -->
@@ -38,8 +34,6 @@ if (isset($_POST['hapus'])) {
             <div class="flex justify-between items-center">
                 <h2 class="text-2xl font-bold">Dashboard</h2>
                 <div class="flex items-center space-x-4">
-                    <input type="text" placeholder="Cari data sidang" class="border px-3 py-1 rounded">
-                    <span>🔍</span>
                     <span class="font-bold">Hi, Amanda ! 👤</span>
                 </div>
             </div>
@@ -65,16 +59,28 @@ if (isset($_POST['hapus'])) {
                     <p class="text-2xl font-bold">1</p>
                 </div>
             </div>
-
-            <!-- Tombol Edit dan Hapus -->
-            <div class="mt-5 flex space-x-3">
-                <a href="/edit_dashadmin" class="px-4 py-2 bg-blue-500 text-white rounded">✏ Edit Data</a>
-                <form method="post">
-                    <button type="submit" name="hapus" class="px-4 py-2 bg-red-500 text-white rounded">🗑 Hapus Data</button>
-                </form>
-            </div>
-
         </div>
     </div>
 </body>
+
+<script>
+    document.getElementById('logoutButton').addEventListener('click', function(e) {
+        e.preventDefault();
+        Swal.fire({
+            title: 'Keluar dari sistem?',
+            text: "Anda akan keluar dari aplikasi.",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#e3342f',
+            cancelButtonColor: '#6c757d',
+            confirmButtonText: 'Ya, Logout',
+            cancelButtonText: 'Batal'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = "/logout";
+            }
+        });
+    });
+</script>
+
 </html>

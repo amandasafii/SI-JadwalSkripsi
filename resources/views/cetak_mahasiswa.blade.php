@@ -16,14 +16,14 @@
             <div>
                 <h1 class="text-xl font-bold">Sistem Informasi Skripsi Online</h1>
                 <nav class="mt-5">
-                    <a href="/dashboard_dosen" class="block py-2 px-4 mb-2">🏠 Dashboard</a>
-                    <a href="/penguji_dosen" class="block py-2 px-4 mb-2">🧑‍⚖️ Penguji Sidang</a>
-                    <a href="/cetak_dosen" class="block py-2 px-4 mb-2 text-gray-700 font-bold bg-gray-300 rounded">🖨
-                        Cetak</a>
+                    <a href="/dashboard_mahasiswa" class="block py-2 px-4 mb-2">🏠 Dashboard</a>
+                    <a href="/jadwal_mahasiswa" class="block py-2 px-4 mb-2">📅 Jadwal Sidang</a>
+                    <a href="/cetak_mahasiswa"
+                        class="block py-2 px-4 mb-2 text-gray-700 font-bold bg-gray-300 rounded">🖨 Cetak</a>
                 </nav>
             </div>
-            <button id="logoutButton" class="block py-2 px-4 text-black rounded font-bold text-left w-full">⬅ Log
-                Out</button>
+            <button id="logoutButton"
+                class="block py-2 px-4 text-black rounded font-bold text-left w-full">⬅ Log Out</button>
         </div>
 
 
@@ -45,19 +45,23 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($view_penjadwalan['data'] as $d)
+                            @foreach ($data as $item)
                                 <tr class="border">
                                     <td class="border p-2 text-center">{{ $loop->iteration }}</td>
-                                    <td class="border p-2">{{ $d['npm'] }}</td>
-                                    <td class="border p-2">{{ $d['nama_mahasiswa'] }}</td>
-                                    <td class="border p-2">{{ $d['program_studi'] }}</td>
-                                    <td class="border p-2">{{ $d['waktu_sidang'] }}</td>
-                                    <td class="border p-2">{{ $d['nama_ruangan'] }}</td>
-                                    <td class="border p-2">{{ $d['dosen_penguji'] }}</td>
+                                    <td class="border p-2">{{ $item['npm'] }}</td>
+                                    <td class="border p-2">{{ $item['nama_mahasiswa'] }}</td>
+                                    <td class="border p-2">{{ $item['program_studi'] }}</td>
+                                    <td class="border p-2">{{ $item['waktu_sidang'] }}</td>
+                                    <td class="border p-2">{{ $item['nama_ruangan'] }}</td>
+                                    <td class="border p-2">{{ $item['dosen_penguji'] }}</td>
                                 </tr>
                             @endforeach
                         </tbody>
                     </table>
+                    <!-- Pagination -->
+                    <div class="mt-4">
+                        {{ $data->links() }}
+                    </div>
                 </div>
                 <div class="mt-4 text-right">
                     <button onclick="window.print()"

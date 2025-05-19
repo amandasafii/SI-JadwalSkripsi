@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <title>Dashboard</title>
 </head>
+
 <body class="bg-gray-100">
     <div class="flex h-screen">
         <!-- Sidebar -->
@@ -13,27 +16,23 @@
             <div>
                 <h1 class="text-xl font-bold">Sistem Informasi Skripsi Online</h1>
                 <nav class="mt-5">
-                    <a href="/dashboard_dosen" class="block py-2 px-4 bg-gray-300 rounded mb-2">🏠 Dashboard</a>
-                    <a href="/mahasiswa_dosen" class="block py-2 px-4 mb-2">🎓 Mahasiswa</a>
-                    <a href="/dosen_dosen" class="block py-2 px-4 mb-2">👩‍🏫 Dosen</a>
-                    {{-- <a href="/penguji_dosen" class="block py-2 px-4 mb-2">🧑‍⚖️ Penguji Sidang</a>
-                    <a href="/jadwal_dosen" class="block py-2 px-4 mb-2">📅 Jadwal Sidang</a> --}}
-                    <a href="/ruangan_dosen" class="block py-2 px-4 mb-2">🏢 Ruangan</a>
-                    <a href="/cetak_dosen" class="block py-2 px-4 mb-2">🖨 Cetak</a>
+                    <a href="/dashboard_mahasiswa"
+                        class="block py-2 px-4 mb-2 text-gray-700 font-bold bg-gray-300 rounded">🏠 Dashboard</a>
+                    <a href="/jadwal_mahasiswa" class="block py-2 px-4 mb-2">📅 Jadwal Sidang</a>
+                    <a href="/cetak_mahasiswa" class="block py-2 px-4 mb-2">🖨 Cetak</a>
                 </nav>
             </div>
-            <a href="/logout_dosen" class="block py-2 px-4 text-black rounded font-bold">⬅ Log Out</a>
+            <button id="logoutButton" class="block py-2 px-4 text-black rounded font-bold text-left w-full">⬅ Log
+                Out</button>
         </div>
 
-        
-        
+
+
         <!-- Main Content -->
         <div class="flex-1 p-6">
             <div class="flex justify-between items-center">
                 <h2 class="text-2xl font-bold">Dashboard</h2>
                 <div class="flex items-center space-x-4">
-                    <input type="text" placeholder="Cari data sidang" class="border px-3 py-1 rounded">
-                    <span>🔍</span>
                     <span class="font-bold">Hi, Amanda ! 👤</span>
                 </div>
             </div>
@@ -62,4 +61,25 @@
         </div>
     </div>
 </body>
+
+<script>
+    document.getElementById('logoutButton').addEventListener('click', function(e) {
+        e.preventDefault();
+        Swal.fire({
+            title: 'Keluar dari sistem?',
+            text: "Anda akan keluar dari aplikasi.",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#e3342f',
+            cancelButtonColor: '#6c757d',
+            confirmButtonText: 'Ya, keluar!',
+            cancelButtonText: 'Batal'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = '/logout';
+            }
+        });
+    });
+</script>
+
 </html>

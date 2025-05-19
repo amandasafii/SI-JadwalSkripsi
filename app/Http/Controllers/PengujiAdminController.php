@@ -5,10 +5,9 @@ namespace App\Http\Controllers;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ClientException;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Http;
 use Illuminate\Pagination\LengthAwarePaginator;
 
-class RuanganAdminController extends Controller
+class PengujiAdminController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,7 +15,7 @@ class RuanganAdminController extends Controller
     public function index(Request $request)
     {
         $client = new Client();
-        $url = 'http://localhost:8080/ruangan';
+        $url = 'http://localhost:8080/penguji';
 
         $response = $client->request('GET', $url);
         $content = $response->getBody()->getContents();
@@ -26,8 +25,8 @@ class RuanganAdminController extends Controller
         if ($request->has('search')) {
             $search = strtolower($request->search);
             $data = array_filter($data, function ($item) use ($search) {
-                return str_contains(strtolower($item['kode_ruangan']), $search) ||
-                    str_contains(strtolower($item['nama_ruangan']), $search);
+                return str_contains(strtolower($item['nidn']), $search) ||
+                    str_contains(strtolower($item['peran']), $search);
             });
         }
 
@@ -44,7 +43,7 @@ class RuanganAdminController extends Controller
             ['path' => $request->url(), 'query' => $request->query()]
         );
 
-        return view('ruangan_admin', ['data' => $paginatedData]);
+        return view('penguji_admin', ['data' => $paginatedData]);
     }
 
     /**
@@ -52,7 +51,24 @@ class RuanganAdminController extends Controller
      */
     public function create()
     {
-        return view('tambah_ruanganadmin');
+        $client = new Client();
+
+        $jadwalResponse = $client->request('GET', 'http://localhost:8080/jadwal');
+        $dosenResponse = $client->request('GET', 'http://localhost:8080/dosen');
+
+        $jadwalData = json_decode($jadwalResponse->getBody(), true)['data'];
+        $dosenData = json_decode($dosenResponse->getBody(), true)['data'];
+
+        $peran = [
+            ['peran' => 'Penguji 1'],
+            ['peran' => 'Penguji 2'],
+        ];
+
+        return view('tambah_pengujiadmin', [
+            'jadwal' => $jadwalData,
+            'dosen'   => $dosenData,
+            'peran' => $peran
+        ]);
     }
 
     /**
@@ -60,16 +76,18 @@ class RuanganAdminController extends Controller
      */
     public function store(Request $request)
     {
-        $kode_ruangan = $request->kode_ruangan;
-        $nama_ruangan = $request->nama_ruangan;
+        $id_jadwal = $request->id_jadwal;
+        $nidn = $request->nidn;
+        $peran = $request->peran;
 
         $parameters = [
-            'kode_ruangan' => $kode_ruangan,
-            'nama_ruangan' => $nama_ruangan,
+            'id_jadwal' => $id_jadwal,
+            'nidn'  => $nidn,
+            'peran' => $peran,
         ];
 
         $client = new Client();
-        $url = 'http://localhost:8080/ruangan';
+        $url = 'http://localhost:8080/penguji';
 
         try {
             $response = $client->request('POST', $url, [
@@ -77,10 +95,10 @@ class RuanganAdminController extends Controller
                 'body' => json_encode($parameters)
             ]);
 
-            return redirect('ruangan_admin')->with('success', 'Data Ruangan Berhasil Ditambahkan.');
+            return redirect('penguji_admin')->with('success', 'Data Penguji Sidang Berhasil Ditambahkan.');
         } catch (ClientException $e) {
             $error = json_decode($e->getResponse()->getBody()->getContents(), true);
-            $validationErrors = $error['messages']['message'] ?? ['Terjadi kesalahan'];
+            $validationErrors = $error['messages'] ?? ['Terjadi kesalahan'];
             return redirect()->back()->withErrors($validationErrors)->withInput();
         }
     }
@@ -88,7 +106,7 @@ class RuanganAdminController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show()
+    public function show(string $id)
     {
         //
     }
@@ -96,44 +114,58 @@ class RuanganAdminController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $kode_ruangan)
+    public function edit(string $id_penguji)
     {
         $client = new Client();
-        $url = 'http://localhost:8080/ruangan/' . $kode_ruangan;
 
         try {
-            $response = $client->request('GET', $url);
-            $content = $response->getBody()->getContents();
-            $contentArray = json_decode($content, true);
+            $pengujiResponse = $client->request('GET', 'http://localhost:8080/penguji/' . $id_penguji);
+            $pengujiData = json_decode($pengujiResponse->getBody()->getContents(), true);
+            $data = $pengujiData['data'];
 
-            $data = $contentArray['data'];
-            return view('edit_ruanganadmin', ['data' => $data]);
+            $jadwalResponse = $client->request('GET', 'http://localhost:8080/jadwal');
+            $jadwalData = json_decode($jadwalResponse->getBody()->getContents(), true);
+            $jadwal = $jadwalData['data'];
+
+            $dosenResponse = $client->request('GET', 'http://localhost:8080/dosen');
+            $dosenData = json_decode($dosenResponse->getBody()->getContents(), true);
+            $dosen = $dosenData['data'];
+
+            $peran = [
+                ['peran' => 'Penguji 1'],
+                ['peran' => 'Penguji 2'],
+            ];
+
+            return view('edit_pengujiadmin', compact('data', 'jadwal', 'dosen', 'peran'));
+            
         } catch (ClientException $e) {
             $response = $e->getResponse()->getBody()->getContents();
             $error = json_decode($response, true);
 
-            $messages = $error['messages']['message'] ?? ($error['message'] ?? ['Terjadi kesalahan saat mengambil data.']);
-            return redirect()->to('edit_ruanganadmin')->withErrors($messages);
+            $messages = $error['messages'] ?? ($error['message'] ?? ['Terjadi kesalahan saat mengambil data.']);
+            return redirect()->to('edit_pengujiadmin')->withErrors($messages);
         } catch (\Exception $e) {
-            return redirect()->to('edit_ruanganadmin')->withErrors(['Terjadi kesalahan tidak terduga.']);
+            return redirect()->to('edit_pengujiadmin')->withErrors(['Terjadi kesalahan tidak terduga.']);
         }
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, $kode_ruangan)
+    public function update(Request $request, string $id_penguji)
     {
-        $kode_ruangan = $request->kode_ruangan;
-        $nama_ruangan = $request->nama_ruangan;
+        $id_jadwal = $request->id_jadwal;
+        $nidn = $request->nidn;
+        $peran = $request->peran;;
 
         $parameters = [
-            'kode_ruangan' => $kode_ruangan,
-            'nama_ruangan' => $nama_ruangan,
+            'id_jadwal' => $id_jadwal,
+            'nidn'  => $nidn,
+            'peran' => $peran,
         ];
 
         $client = new Client();
-        $url = 'http://localhost:8080/ruangan/' . $kode_ruangan;
+        $url = 'http://localhost:8080/penguji/' . $id_penguji;
 
         try {
             $response = $client->request('PUT', $url, [
@@ -141,7 +173,7 @@ class RuanganAdminController extends Controller
                 'body' => json_encode($parameters)
             ]);
 
-            return redirect('ruangan_admin')->with('success', 'Data Ruangan Berhasil Diubah.');
+            return redirect('penguji_admin')->with('success', 'Data Penguji Sidang Berhasil Diubah.');
         } catch (ClientException $e) {
             $error = json_decode($e->getResponse()->getBody()->getContents(), true);
             $validationErrors = $error['messages']['message'] ?? ['Terjadi kesalahan'];
@@ -152,18 +184,18 @@ class RuanganAdminController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy($kode_ruangan)
+    public function destroy(string $id_penguji)
     {
         $client = new Client();
-        $url = 'http://localhost:8080/ruangan/' . $kode_ruangan;
+        $url = 'http://localhost:8080/penguji/' . $id_penguji;
 
         try {
             $response = $client->request('DELETE', $url);
-            return redirect()->to('ruangan_admin')->with('success', 'Data Ruangan Berhasil Dihapus.');
+            return redirect('penguji_admin')->with('success', 'Data Penguji Sidang Berhasil Dihapus.');
         } catch (ClientException $e) {
             $error = json_decode($e->getResponse()->getBody()->getContents(), true);
             $validationErrors = $error['messages']['message'] ?? ['Terjadi kesalahan'];
-            return redirect()->to('ruangan_admin')->withErrors($validationErrors)->withInput();
+            return redirect()->back()->withErrors($validationErrors)->withInput();
         }
     }
 }

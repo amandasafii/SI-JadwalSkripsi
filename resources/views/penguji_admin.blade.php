@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <title>Data Ruangan</title>
+    <title>Penguji Sidang</title>
 </head>
 
 <body class="bg-gray-100 flex">
@@ -19,15 +19,16 @@
                     <a href="/dashboard_admin" class="block py-2 px-4 mb-2">🏠 Dashboard</a>
                     <a href="/mahasiswa_admin" class="block py-2 px-4 mb-2">🎓 Mahasiswa</a>
                     <a href="/dosen_admin" class="block py-2 px-4 mb-2">👩‍🏫 Dosen</a>
-                    <a href="/ruangan_admin" class="block py-2 px-4 mb-2 text-gray-700 font-bold bg-gray-300 rounded">🏢
-                        Ruangan</a>
+                    <a href="/ruangan_admin" class="block py-2 px-4 mb-2">🏢 Ruangan</a>
                     <a href="/jadwal_admin" class="block py-2 px-4 mb-2">📅 Jadwal Sidang</a>
-                    <a href="/penguji_admin" class="block py-2 px-4 mb-2">🧑‍⚖️ Penguji Sidang</a>
+                    <a href="/penguji_admin"class="block py-2 px-4 mb-2 text-gray-700 font-bold bg-gray-300 rounded">🧑‍⚖️
+                        Penguji Sidang</a>
                 </nav>
             </div>
             <button id="logoutButton" class="block py-2 px-4 text-black rounded font-bold text-left w-full">⬅ Log
                 Out</button>
         </div>
+
 
         <!-- Main Content -->
         <div class="flex-1 p-6 overflow-auto">
@@ -35,15 +36,15 @@
                 <!-- Judul dan Baris Kontrol -->
                 <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-4 gap-4">
                     <div>
-                        <h2 class="text-2xl font-semibold text-gray-700 mb-2">Data Ruangan</h2>
-                        <a href="/ruangan_admin/create"
+                        <h2 class="text-2xl font-semibold text-gray-700 mb-2">Data Penguji Sidang</h2>
+                        <a href="/penguji_admin/create"
                             class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded inline-block">+
                             Tambah Data</a>
                     </div>
 
                     <!-- Form Pencarian -->
-                    <form action="{{ url('/ruangan_admin') }}" method="GET" class="w-full md:w-auto">
-                        <input type="text" name="search" placeholder="Cari Kode ruangan / Nama ruanngan"
+                    <form action="{{ url('/penguji_admin') }}" method="GET" class="w-full md:w-auto">
+                        <input type="text" name="search" placeholder="Cari NIDN / Peran"
                             value="{{ request('search') }}"
                             class="border border-gray-300 rounded px-4 py-2 w-full md:w-64 focus:outline-none focus:ring-2 focus:ring-blue-400">
                         <button type="submit"
@@ -80,33 +81,35 @@
                     </script>
                 @endif
 
-                <!-- Membuat tabel responsif -->
+                <!-- Tabel Data -->
                 <div class="overflow-x-auto">
                     <table class="w-full border border-gray-400">
                         <thead>
                             <tr class="bg-gray-200">
-                                <th class="border border-gray-400 p-2">No</th>
-                                <th class="border border-gray-400 px-4 py-2">Kode Ruangan</th>
-                                <th class="border border-gray-400 px-4 py-2">Nama Ruangan</th>
-                                <th class="border border-gray-400 px-4 py-2 w-24">Aksi</th>
+                                <th class="border border-gray-300 px-4 py-2">No</th>
+                                <th class="border border-gray-300 px-4 py-2">Id Jadwal</th>
+                                <th class="border border-gray-300 px-4 py-2">NIDN</th>
+                                <th class="border border-gray-300 px-4 py-2">Peran</th>
+                                <th class="border border-gray-300 px-4 py-2">Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($data as $item)
-                                <tr class="bg-white">
-                                    <td class="border border-gray-400 p-2 text-center">{{ $loop->iteration }}</td>
-                                    <td class="border border-gray-400 px-4 py-2">{{ $item['kode_ruangan'] }}</td>
-                                    <td class="border border-gray-400 px-4 py-2">{{ $item['nama_ruangan'] }}</td>
-                                    <td class="border border-gray-400 px-4 py-2 text-center w-24">
-                                        <a href="{{ url('ruangan_admin/' . $item['kode_ruangan']) }}/edit"
+                                <tr class="border">
+                                    <td class="border border-gray-300 px-4 py-2 text-center">{{ $loop->iteration }}
+                                    </td>
+                                    <td class="border border-gray-300 px-4 py-2">{{ $item['id_jadwal'] }}</td>
+                                    <td class="border border-gray-300 px-4 py-2">{{ $item['nidn'] }}</td>
+                                    <td class="border border-gray-300 px-4 py-2">{{ $item['peran'] }}</td>
+                                    <td class="border border-gray-300 px-4 py-2 text-center w-24">
+                                        <a href="{{ url('penguji_admin/' . $item['id_penguji']) }}/edit"
                                             class="text-blue-500 hover:text-blue-700 px-2">✏️</a>|
-                                        <form id="delete-form-{{ $item['kode_ruangan'] }}"
-                                            action="{{ url('ruangan_admin/' . $item['kode_ruangan']) }}" method="POST"
+                                        <form id="delete-form-{{ $item['id_penguji'] }}"
+                                            action="{{ url('penguji_admin/' . $item['id_penguji']) }}" method="POST"
                                             class="d-inline">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="button"
-                                                onclick="confirmDelete('{{ $item['kode_ruangan'] }}')"
+                                            <button type="button" onclick="confirmDelete('{{ $item['id_penguji'] }}')"
                                                 class="text-red-500 hover:text-red-700 px-2">🗑️</button>
                                         </form>
                                     </td>
@@ -123,7 +126,7 @@
         </div>
     </div>
     <script>
-        function confirmDelete(kode_ruangan) {
+        function confirmDelete(id_jadwal) {
             Swal.fire({
                 title: 'Yakin ingin menghapus?',
                 text: "Data tidak dapat dikembalikan!",
@@ -135,28 +138,28 @@
                 cancelButtonText: 'Batal'
             }).then((result) => {
                 if (result.isConfirmed) {
-                    document.getElementById('delete-form-' + kode_ruangan).submit();
+                    document.getElementById('delete-form-' + id_jadwal).submit();
                 }
             });
         }
 
         document.getElementById('logoutButton').addEventListener('click', function(e) {
-        e.preventDefault();
-        Swal.fire({
-            title: 'Keluar dari sistem?',
-            text: "Anda akan keluar dari aplikasi.",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#e3342f',
-            cancelButtonColor: '#6c757d',
-            confirmButtonText: 'Ya, Logout',
-            cancelButtonText: 'Batal'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                window.location.href = "/logout";
-            }
+            e.preventDefault();
+            Swal.fire({
+                title: 'Keluar dari sistem?',
+                text: "Anda akan keluar dari aplikasi.",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#e3342f',
+                cancelButtonColor: '#6c757d',
+                confirmButtonText: 'Ya, keluar!',
+                cancelButtonText: 'Batal'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = '/logout';
+                }
+            });
         });
-    });
     </script>
 </body>
 

@@ -1,0 +1,43 @@
+<?php
+
+namespace App\Http\Controllers;
+
+// use App\Models\cetak_admin;
+use GuzzleHttp\Client;
+use GuzzleHttp\Exception\ClientException;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
+use Illuminate\Pagination\LengthAwarePaginator;
+
+class CetakMahasiswaController extends Controller
+{
+    /**
+     * Display a listing of the resource.
+     */
+    public function index(Request $request)
+    {
+
+        $client = new Client();
+        $url = 'http://localhost:8080/view_penjadwalan';
+
+        $response = $client->request('GET', $url);
+        $content = $response->getBody()->getContents();
+        $contentArray = json_decode($content, true);
+        $data = $contentArray['data'];
+
+        $perPage = 10;
+        $currentPage = LengthAwarePaginator::resolveCurrentPage();
+        $itemCollection = collect($data);
+        $currentPageItems = $itemCollection->slice(($currentPage - 1) * $perPage, $perPage)->values();
+
+        $paginatedData = new LengthAwarePaginator(
+            $currentPageItems,
+            count($itemCollection),
+            $perPage,
+            $currentPage,
+            ['path' => $request->url(), 'query' => $request->query()]
+        );
+
+        return view('cetak_mahasiswa', ['data' => $paginatedData]);
+    }
+}
